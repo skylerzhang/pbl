@@ -1,0 +1,12 @@
+{
+    "name": "node_pbl",
+    "version": "1.0.0",
+    "author": "bae",
+    "description": "The first bae nodejs app!",
+    "scripts": {
+        "start": "node pbl_server.js"
+    },
+    "dependencies": {
+    }
+}
+
