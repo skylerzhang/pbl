@@ -1,12 +1,13 @@
 {
-    "name": "node_pbl",
+    "name": "bae-nodejs",
     "version": "1.0.0",
     "author": "bae",
     "description": "The first bae nodejs app!",
     "scripts": {
-        "start": "node pbl_server.js"
+        "start": "node my_server.js"
     },
     "dependencies": {
+    	"mysql": "2.0.0-alpha9"
     }
 }
 

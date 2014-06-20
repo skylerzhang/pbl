@@ -27,6 +27,7 @@ var server=http.createServer(function (request, response){
 		
 		if(url=='/pubuliu')
 		{
+			
 			var n=parseInt(get.page);
 			
 			if(n<1 || isNaN(n))
@@ -39,8 +40,20 @@ var server=http.createServer(function (request, response){
 			
 			var sql="SELECT * FROM pubuliu LIMIT "+s+","+pageSize;
 			
-			var db=mysql.createConnection({host: 'sqld.duapp.com', user: 'Zsg9BMEHNCXZNSFjHu276bdd', password: '9N3t5ZBffW67q1xRANfIRdqjr8qhsVwr', database: 'gTdXkAwiqMPbkILLKXXg'});
-			
+			var db=mysql.createConnection({host: 'sqld.duapp.com',port: 4050, user: 'Zsg9BMEHNCXZNSFjHu276bdd', password: '9N3t5ZBffW67q1xRANfIRdqjr8qhsVwr', database: 'gTdXkAwiqMPbkILLKXXg'});
+			db.on('error',function(err) 
+				{
+      				if (err.errno != 'ECONNRESET') {
+        			throw err;
+      			} 
+      			else 
+      			{
+        			//do nothing
+        			response.write('----数据库错误');
+        			response.end();
+      			}
+  			});
+  			
 			db.query(sql, function (err, data){
 				if(err)
 				{
