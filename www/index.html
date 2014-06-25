@@ -2,8 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="author" content="智能社 - zhinengshe.com" />
-<meta name="copyright" content="智能社 - zhinengshe.com" />
+<meta name="author" content="skyler"/>
 <title>nodejs_exp</title>
 <style>
 * {margin:0; padding:0; list-style:none;}
@@ -12,74 +11,20 @@
 #div1 ul {width:300px; float:left; margin:10px; border:1px solid red;}
 #div1 ul li {width:300px; padding:10px 0; background:#CCC;}
 #div1 ul li img {width:300px;}
+
+#show {background: yellow; position: relative;}
+#football{border-radius: 50%; position: absolute;}
 </style>
-<script src="ajax.js"></script>
+<script src="js/sea.js"></script>
 <script>
-function parseJson(str)
-{
-	if(window.JSON&&JSON.parse)
-	{
-		return JSON.parse(str);
-	}
-	else
-	{
-		return (new Function('return '+str))();
-	}
-}
 
 window.onload=function ()
 {
-	var aUl=document.getElementById('div1').children;
-	var nowPage=1;
-	
-	function getPage(n)
-	{
-		var url='pubuliu?page='+n+'&t='+Math.random();
-		
-		ajax(url, function (str){
-			var json=parseJson(str);
-			
-			for(var i=0;i<json.data.length;i++)
-			{
-				var oImg=new Image();
-				
-				(function (index){
-					oImg.onload=function ()
-					{
-						//算新高度	newH=newW*oldH/oldW
-						
-						var oLi=document.createElement('li');
-						
-						oLi.innerHTML='<img src="img/'+json.data[index].src+'" />';
-						
-						oLi.children[0].style.height=300*this.height/this.width+'px';
-						
-						//最短
-						var arr=[];
-						for(var j=0;j<aUl.length;j++)
-						{
-							arr[j]=aUl[j];
-						}
-						
-						arr.sort(function (ul1, ul2){
-							return ul1.offsetHeight-ul2.offsetHeight;
-						});
-						
-						arr[0].appendChild(oLi);
-						
-						//alert('a');
-					};
-				})(i);
-				
-				oImg.src='img/'+json.data[i].src;
-			}
-		}, function (){
-			alert('有错');
-		});
-	}
-	
-	getPage(1);
-	
+    var nowPage=1;
+    seajs.use('pbl_c.js',function(mod){
+        mod.startPbl(1,'div1')
+    });
+
 	window.onscroll=window.onresize=function ()
 	{
 		var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
@@ -87,8 +32,10 @@ window.onload=function ()
 		if(scrollTop==document.body.scrollHeight-document.documentElement.clientHeight)
 		{
 			nowPage++;
-			
-			getPage(nowPage);
+
+            seajs.use('pbl_c.js',function(mod){
+                mod.startPbl(nowPage,'div1')
+            });
 		}
 	};
 };
