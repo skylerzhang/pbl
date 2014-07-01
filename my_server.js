@@ -12,26 +12,22 @@ var server=http.createServer(function (request, response){
 	request.addListener('end', function (){
 		var post=qs.parse(str);
 		
-		if(request.url.indexOf('?')!=-1)
-		{
+		if(request.url.indexOf('?')!=-1){
 			var arr=request.url.split('?');
 			
 			var url=arr[0];
 			var get=qs.parse(arr[1]);
 		}
-		else
-		{
+		else{
 			var url=request.url;
 			var get={};
 		}
 		
-		if(url=='/pubuliu')
-		{
+		if(url=='/pubuliu'){
 			
 			var n=parseInt(get.page);
 			
-			if(n<1 || isNaN(n))
-			{
+			if(n<1 || isNaN(n)){
 				n=1;
 			}
 			
@@ -46,8 +42,7 @@ var server=http.createServer(function (request, response){
       				if (err.errno != 'ECONNRESET') {
         			throw err;
       			} 
-      			else 
-      			{
+      			else {
         			//do nothing
         			response.write('----数据库错误');
         			response.end();
@@ -55,27 +50,22 @@ var server=http.createServer(function (request, response){
   			});
   			
 			db.query(sql, function (err, data){
-				if(err)
-				{
+				if(err){
 					response.write('{"err": 1, "msg": "数据库出错"}');
 					response.end();
 				}
-				else
-				{
+				else{
 					response.write('{"err": 0, "data": '+JSON.stringify(data)+'}');
 					response.end();
 				}
 			});
 		}
-		else
-		{
+		else{
 			fs.readFile('www'+url, function (err, data){
-				if(err)
-				{
+				if(err){
 					response.write('404');
 				}
-				else
-				{
+				else{
 					response.write(data);
 				}
 				response.end();
