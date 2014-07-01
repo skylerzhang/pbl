@@ -40,7 +40,7 @@ var server=http.createServer(function (request, response){
 			
 			var sql="SELECT * FROM pubuliu LIMIT "+s+","+pageSize;
 			
-			var db=mysql.createConnection({host: 'sqld.duapp.com',port: 4050, user: 'Zsg9BMEHNCXZNSFjHu276bdd', password: '9N3t5ZBffW67q1xRANfIRdqjr8qhsVwr', database: 'gTdXkAwiqMPbkILLKXXg'});
+			var db=mysql.createConnection({host: 'sqld.duapp.com',port: 4050, user: 'xxx', password: 'xxx', database: 'xxx'});
 			db.on('error',function(err) 
 				{
       				if (err.errno != 'ECONNRESET') {
